@@ -1,0 +1,14 @@
+[
+  {"question":"Tech選考ではどのようなバックグラウンドの人を想定していますか？","expected_id":"tech"},
+  {"question":"大学を海外で卒業する場合もエントリーできますか？","expected_id":"overseas"},
+  {"question":"最後の面談はリモートで受けられますか？","expected_id":"interview"},
+  {"question":"入社直後に学ぶ期間はどのくらいですか？","expected_id":"training"},
+  {"question":"客先で働くときの格好はどうなりますか？","expected_id":"dress"},
+  {"question":"東京以外へ勤務地が変わることはありますか？","expected_id":"transfer"},
+  {"question":"評価を自分で説明する機会はありますか？","expected_id":"evaluation"},
+  {"question":"次の案件への参加はどのように決めますか？","expected_id":"assignment"},
+  {"question":"Tech選考の合格率は何％ですか？","expected_id":null},
+  {"question":"新卒採用で採る人数は何人ですか？","expected_id":null},
+  {"question":"2029年度の初任給はいくらですか？","expected_id":null},
+  {"question":"Tech選考の対象と新人研修の期間をまとめて教えてください。","expected_id":null}
+]

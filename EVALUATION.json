@@ -1,0 +1,387 @@
+{
+  "evaluated_at": "2026-10-13T02:08:56.396Z",
+  "corpus_checked_at": "2026-10-13",
+  "mode": "APIキーなし・ルール検索",
+  "total": 46,
+  "passed": 46,
+  "accuracy": 1,
+  "answerable": {
+    "total": 29,
+    "passed": 29
+  },
+  "unanswerable": {
+    "total": 17,
+    "abstained": 17,
+    "false_answers": 0
+  },
+  "rows": [
+    {
+      "question": "Tech選考はどんな人が対象ですか？",
+      "expected_id": "tech",
+      "actual_id": "tech",
+      "passed": true,
+      "answer": "Tech選考は、個人開発の経験がある方や大学で研究をしてきた方が対象です。",
+      "source_url": "https://www.future.co.jp/recruit/recruit/rec-fresh/#section2"
+    },
+    {
+      "question": "新卒の募集職種は何ですか？",
+      "expected_id": "role",
+      "actual_id": "role",
+      "passed": true,
+      "answer": "新卒採用の募集職種はITコンサルタントです。",
+      "source_url": "https://www.future.co.jp/recruit/recruit/rec-fresh/#section2"
+    },
+    {
+      "question": "第二新卒でも応募できますか？",
+      "expected_id": "age",
+      "actual_id": "age",
+      "passed": true,
+      "answer": "明確な年齢制限は設けられていません。職務経験が3年未満の第二新卒は、新卒と同じ条件・選考プロセスで扱われます。",
+      "source_url": "https://www.future.co.jp/recruit/recruit/rec-fresh/#section3"
+    },
+    {
+      "question": "海外大学の学生も応募できますか？",
+      "expected_id": "overseas",
+      "actual_id": "overseas",
+      "passed": true,
+      "answer": "海外大学の学生も採用対象で、日本滞在中に国内新卒と同じ選考を受けます。外国籍の方にはネイティブレベルの日本語が応募条件と案内されています。",
+      "source_url": "https://www.future.co.jp/recruit/recruit/rec-fresh/#section3"
+    },
+    {
+      "question": "Web面接は可能ですか？",
+      "expected_id": "interview",
+      "actual_id": "interview",
+      "passed": true,
+      "answer": "最終面接は対面が基本で、選考状況や希望に応じて柔軟に対応すると案内されています。",
+      "source_url": "https://www.future.co.jp/recruit/recruit/rec-fresh/#section3"
+    },
+    {
+      "question": "選考時にITスキルは必要？",
+      "expected_id": "skills",
+      "actual_id": "skills",
+      "passed": true,
+      "answer": "選考段階ではITスキルの有無は問われないと案内されています。",
+      "source_url": "https://www.future.co.jp/recruit/recruit/rec-fresh/#section3"
+    },
+    {
+      "question": "新人研修は何か月ですか？",
+      "expected_id": "training",
+      "actual_id": "training",
+      "passed": true,
+      "answer": "新人研修は4～6か月で、プログラミング中心のIT基礎研修がカリキュラムの約7割とされています。",
+      "source_url": "https://www.future.co.jp/recruit/recruit/rec-fresh/#section3"
+    },
+    {
+      "question": "入社前に必要な資格は？",
+      "expected_id": "bookkeeping",
+      "actual_id": "bookkeeping",
+      "passed": true,
+      "answer": "日商簿記2級が入社条件です。アドバンスト採用・プロフェッショナル採用では入社前取得は任意と案内されています。",
+      "source_url": "https://www.future.co.jp/recruit/recruit/rec-fresh/#section3"
+    },
+    {
+      "question": "勤務時の服装は？",
+      "expected_id": "dress",
+      "actual_id": "dress",
+      "passed": true,
+      "answer": "顧客訪問・常駐時はスーツが基本で、社内ではビジネスカジュアルの社員も多いと案内されています。新卒の研修期間はスーツ着用とされています。",
+      "source_url": "https://www.future.co.jp/recruit/recruit/rec-fresh/#section3"
+    },
+    {
+      "question": "休日出勤したら代休はありますか？",
+      "expected_id": "holiday",
+      "actual_id": "holiday",
+      "passed": true,
+      "answer": "プロジェクトの状況によって休日出勤になる場合があり、その場合は平日に代休を取得する規則です。",
+      "source_url": "https://www.future.co.jp/recruit/recruit/rec-fresh/#section3"
+    },
+    {
+      "question": "転勤はありますか？",
+      "expected_id": "transfer",
+      "actual_id": "transfer",
+      "passed": true,
+      "answer": "基本的に東京本社所属で国内転勤はありません。地方への出張はあり得ます。",
+      "source_url": "https://www.future.co.jp/recruit/recruit/rec-fresh/#section3"
+    },
+    {
+      "question": "勤務時間を教えてください",
+      "expected_id": "hours",
+      "actual_id": "hours",
+      "passed": true,
+      "answer": "標準時刻は9時から17時30分で休憩1時間です。コンサルタントには専門業務型裁量労働制が適用されます。",
+      "source_url": "https://www.future.co.jp/recruit/recruit/rec-fresh/#section3"
+    },
+    {
+      "question": "社員食堂のメニューは？",
+      "expected_id": null,
+      "actual_id": null,
+      "passed": true,
+      "answer": "公開情報では確認できません",
+      "source_url": "https://www.future.co.jp/recruit/recruit/rec-fresh/"
+    },
+    {
+      "question": "採用担当者の個人携帯番号は？",
+      "expected_id": null,
+      "actual_id": null,
+      "passed": true,
+      "answer": "公開情報では確認できません",
+      "source_url": "https://www.future.co.jp/recruit/recruit/rec-fresh/"
+    },
+    {
+      "question": "2029年度の初任給はいくら？",
+      "expected_id": null,
+      "actual_id": null,
+      "passed": true,
+      "answer": "公開情報では確認できません",
+      "source_url": "https://www.future.co.jp/recruit/recruit/rec-fresh/"
+    },
+    {
+      "question": "研修中の社員食堂のメニューは？",
+      "expected_id": null,
+      "actual_id": null,
+      "passed": true,
+      "answer": "公開情報では確認できません",
+      "source_url": "https://www.future.co.jp/recruit/recruit/rec-fresh/"
+    },
+    {
+      "question": "Tech選考の面接回数は？",
+      "expected_id": null,
+      "actual_id": null,
+      "passed": true,
+      "answer": "公開情報では確認できません",
+      "source_url": "https://www.future.co.jp/recruit/recruit/rec-fresh/"
+    },
+    {
+      "question": "研究経験でもTech選考に応募できますか？",
+      "expected_id": "tech",
+      "actual_id": "tech",
+      "passed": true,
+      "answer": "Tech選考は、個人開発の経験がある方や大学で研究をしてきた方が対象です。",
+      "source_url": "https://www.future.co.jp/recruit/recruit/rec-fresh/#section2"
+    },
+    {
+      "question": "Tech選考は個人開発経験が対象ですか？",
+      "expected_id": "tech",
+      "actual_id": "tech",
+      "passed": true,
+      "answer": "Tech選考は、個人開発の経験がある方や大学で研究をしてきた方が対象です。",
+      "source_url": "https://www.future.co.jp/recruit/recruit/rec-fresh/#section2"
+    },
+    {
+      "question": "新卒採用の職種は何ですか？",
+      "expected_id": "role",
+      "actual_id": "role",
+      "passed": true,
+      "answer": "新卒採用の募集職種はITコンサルタントです。",
+      "source_url": "https://www.future.co.jp/recruit/recruit/rec-fresh/#section2"
+    },
+    {
+      "question": "選考はいつ開催されますか？",
+      "expected_id": "apply",
+      "actual_id": "apply",
+      "passed": true,
+      "answer": "選考案内は、採用サイトからエントリーした方に案内されます。",
+      "source_url": "https://www.future.co.jp/recruit/recruit/rec-fresh/#section3"
+    },
+    {
+      "question": "既卒は応募可能ですか？",
+      "expected_id": "age",
+      "actual_id": "age",
+      "passed": true,
+      "answer": "明確な年齢制限は設けられていません。職務経験が3年未満の第二新卒は、新卒と同じ条件・選考プロセスで扱われます。",
+      "source_url": "https://www.future.co.jp/recruit/recruit/rec-fresh/#section3"
+    },
+    {
+      "question": "外国籍の応募に日本語は必要ですか？",
+      "expected_id": "overseas",
+      "actual_id": "overseas",
+      "passed": true,
+      "answer": "海外大学の学生も採用対象で、日本滞在中に国内新卒と同じ選考を受けます。外国籍の方にはネイティブレベルの日本語が応募条件と案内されています。",
+      "source_url": "https://www.future.co.jp/recruit/recruit/rec-fresh/#section3"
+    },
+    {
+      "question": "最終面接は対面で実施されますか？",
+      "expected_id": "interview",
+      "actual_id": "interview",
+      "passed": true,
+      "answer": "最終面接は対面が基本で、選考状況や希望に応じて柔軟に対応すると案内されています。",
+      "source_url": "https://www.future.co.jp/recruit/recruit/rec-fresh/#section3"
+    },
+    {
+      "question": "文系でも応募できますか？",
+      "expected_id": "skills",
+      "actual_id": "skills",
+      "passed": true,
+      "answer": "選考段階ではITスキルの有無は問われないと案内されています。",
+      "source_url": "https://www.future.co.jp/recruit/recruit/rec-fresh/#section3"
+    },
+    {
+      "question": "研修内容はプログラミング中心ですか？",
+      "expected_id": "training",
+      "actual_id": "training",
+      "passed": true,
+      "answer": "新人研修は4～6か月で、プログラミング中心のIT基礎研修がカリキュラムの約7割とされています。",
+      "source_url": "https://www.future.co.jp/recruit/recruit/rec-fresh/#section3"
+    },
+    {
+      "question": "簿記は入社前に必須ですか？",
+      "expected_id": "bookkeeping",
+      "actual_id": "bookkeeping",
+      "passed": true,
+      "answer": "日商簿記2級が入社条件です。アドバンスト採用・プロフェッショナル採用では入社前取得は任意と案内されています。",
+      "source_url": "https://www.future.co.jp/recruit/recruit/rec-fresh/#section3"
+    },
+    {
+      "question": "360度評価制度はどんな内容ですか？",
+      "expected_id": "evaluation",
+      "actual_id": "evaluation",
+      "passed": true,
+      "answer": "完全360度評価制度と案内されています。年1回、自己評価をプレゼンテーションする機会があります。",
+      "source_url": "https://www.future.co.jp/recruit/recruit/rec-fresh/#section3"
+    },
+    {
+      "question": "ポテンシャル採用の初任給はいくら？",
+      "expected_id": "salary",
+      "actual_id": "salary",
+      "passed": true,
+      "answer": "募集要項に記載されたポテンシャル採用の初任給は月額375,000円です。固定残業代を含む見込み額で、正式な金額はオファー時に提示されます。",
+      "source_url": "https://www.future.co.jp/recruit/recruit/rec-fresh/#section2"
+    },
+    {
+      "question": "研修の服装はスーツですか？",
+      "expected_id": "dress",
+      "actual_id": "dress",
+      "passed": true,
+      "answer": "顧客訪問・常駐時はスーツが基本で、社内ではビジネスカジュアルの社員も多いと案内されています。新卒の研修期間はスーツ着用とされています。",
+      "source_url": "https://www.future.co.jp/recruit/recruit/rec-fresh/#section3"
+    },
+    {
+      "question": "土日勤務になったら代休は取得できますか？",
+      "expected_id": "holiday",
+      "actual_id": "holiday",
+      "passed": true,
+      "answer": "プロジェクトの状況によって休日出勤になる場合があり、その場合は平日に代休を取得する規則です。",
+      "source_url": "https://www.future.co.jp/recruit/recruit/rec-fresh/#section3"
+    },
+    {
+      "question": "出張はありますか？",
+      "expected_id": "transfer",
+      "actual_id": "transfer",
+      "passed": true,
+      "answer": "基本的に東京本社所属で国内転勤はありません。地方への出張はあり得ます。",
+      "source_url": "https://www.future.co.jp/recruit/recruit/rec-fresh/#section3"
+    },
+    {
+      "question": "始業は何時ですか？",
+      "expected_id": "hours",
+      "actual_id": "hours",
+      "passed": true,
+      "answer": "標準時刻は9時から17時30分で休憩1時間です。コンサルタントには専門業務型裁量労働制が適用されます。",
+      "source_url": "https://www.future.co.jp/recruit/recruit/rec-fresh/#section3"
+    },
+    {
+      "question": "配属はどう決まりますか？",
+      "expected_id": "assignment",
+      "actual_id": "assignment",
+      "passed": true,
+      "answer": "アサイン期間の終了時に面談し、候補プロジェクトとキャリアを考えて次の配属を決めます。同じプロジェクトに2年以上いるコンサルタント社員にはフリーエージェント制度の案内があります。",
+      "source_url": "https://www.future.co.jp/recruit/recruit/rec-fresh/#section3"
+    },
+    {
+      "question": "社長の好きな食べ物は？",
+      "expected_id": null,
+      "actual_id": null,
+      "passed": true,
+      "answer": "公開情報では確認できません",
+      "source_url": "https://www.future.co.jp/recruit/recruit/rec-fresh/"
+    },
+    {
+      "question": "Tech選考の合格率は？",
+      "expected_id": null,
+      "actual_id": null,
+      "passed": true,
+      "answer": "公開情報では確認できません",
+      "source_url": "https://www.future.co.jp/recruit/recruit/rec-fresh/"
+    },
+    {
+      "question": "面接は何回ありますか？",
+      "expected_id": null,
+      "actual_id": null,
+      "passed": true,
+      "answer": "公開情報では確認できません",
+      "source_url": "https://www.future.co.jp/recruit/recruit/rec-fresh/"
+    },
+    {
+      "question": "新人研修の社員食堂メニューは？",
+      "expected_id": null,
+      "actual_id": null,
+      "passed": true,
+      "answer": "公開情報では確認できません",
+      "source_url": "https://www.future.co.jp/recruit/recruit/rec-fresh/"
+    },
+    {
+      "question": "転勤時の引越し補助は？",
+      "expected_id": null,
+      "actual_id": null,
+      "passed": true,
+      "answer": "公開情報では確認できません",
+      "source_url": "https://www.future.co.jp/recruit/recruit/rec-fresh/"
+    },
+    {
+      "question": "給与の支払日はいつ？",
+      "expected_id": null,
+      "actual_id": null,
+      "passed": true,
+      "answer": "公開情報では確認できません",
+      "source_url": "https://www.future.co.jp/recruit/recruit/rec-fresh/"
+    },
+    {
+      "question": "2028年の研修期間は？",
+      "expected_id": null,
+      "actual_id": null,
+      "passed": true,
+      "answer": "公開情報では確認できません",
+      "source_url": "https://www.future.co.jp/recruit/recruit/rec-fresh/"
+    },
+    {
+      "question": "2030年度のTech選考対象は？",
+      "expected_id": null,
+      "actual_id": null,
+      "passed": true,
+      "answer": "公開情報では確認できません",
+      "source_url": "https://www.future.co.jp/recruit/recruit/rec-fresh/"
+    },
+    {
+      "question": "Tech選考とPR選考の倍率は？",
+      "expected_id": null,
+      "actual_id": null,
+      "passed": true,
+      "answer": "公開情報では確認できません",
+      "source_url": "https://www.future.co.jp/recruit/recruit/rec-fresh/"
+    },
+    {
+      "question": "初任給はいくらで研修期間はどれくらい？",
+      "expected_id": null,
+      "actual_id": null,
+      "passed": true,
+      "answer": "公開情報では確認できません",
+      "source_url": "https://www.future.co.jp/recruit/recruit/rec-fresh/"
+    },
+    {
+      "question": "転勤はありますか、社員食堂のメニューは？",
+      "expected_id": null,
+      "actual_id": null,
+      "passed": true,
+      "answer": "公開情報では確認できません",
+      "source_url": "https://www.future.co.jp/recruit/recruit/rec-fresh/"
+    },
+    {
+      "question": "転勤は絶対にないですか？",
+      "expected_id": null,
+      "actual_id": null,
+      "passed": true,
+      "answer": "公開情報では確認できません",
+      "source_url": "https://www.future.co.jp/recruit/recruit/rec-fresh/"
+    }
+  ]
+}

@@ -1,0 +1,459 @@
+{
+  "checked_at": "2026-10-13",
+  "source_policy": "https://www.future.co.jp/site_policy/",
+  "facts": [
+    {
+      "id": "tech",
+      "category": "選考",
+      "question": "Tech選考の対象は？",
+      "answer": "Tech選考は、個人開発の経験がある方や大学で研究をしてきた方が対象です。",
+      "terms": [
+        "Tech選考",
+        "技術選考",
+        "研究",
+        "個人開発",
+        "プロダクト"
+      ],
+      "source_url": "https://www.future.co.jp/recruit/recruit/rec-fresh/#section2",
+      "intent": {
+        "subjects": [
+          "Tech選考",
+          "技術選考"
+        ],
+        "aspects": [
+          "対象",
+          "どんな人",
+          "経験",
+          "研究",
+          "個人開発",
+          "応募",
+          "誰"
+        ]
+      }
+    },
+    {
+      "id": "role",
+      "category": "募集要項",
+      "question": "新卒の募集職種は？",
+      "answer": "新卒採用の募集職種はITコンサルタントです。",
+      "terms": [
+        "募集職種",
+        "職種",
+        "ITコンサルタント",
+        "何職"
+      ],
+      "source_url": "https://www.future.co.jp/recruit/recruit/rec-fresh/#section2",
+      "intent": {
+        "subjects": [
+          "募集職種",
+          "職種",
+          "新卒"
+        ],
+        "aspects": [
+          "職種",
+          "何の仕事",
+          "何職",
+          "ポジション",
+          "採用"
+        ]
+      }
+    },
+    {
+      "id": "apply",
+      "category": "応募",
+      "question": "選考はいつ始まる？",
+      "answer": "選考案内は、採用サイトからエントリーした方に案内されます。",
+      "terms": [
+        "選考時期",
+        "いつ開催",
+        "いつ始まる",
+        "エントリー",
+        "応募開始"
+      ],
+      "source_url": "https://www.future.co.jp/recruit/recruit/rec-fresh/#section3",
+      "intent": {
+        "subjects": [
+          "選考",
+          "エントリー",
+          "応募"
+        ],
+        "aspects": [
+          "いつ",
+          "時期",
+          "開催",
+          "開始",
+          "案内"
+        ]
+      }
+    },
+    {
+      "id": "age",
+      "category": "応募",
+      "question": "年齢制限や第二新卒の応募は？",
+      "answer": "明確な年齢制限は設けられていません。職務経験が3年未満の第二新卒は、新卒と同じ条件・選考プロセスで扱われます。",
+      "terms": [
+        "年齢制限",
+        "既卒",
+        "第二新卒",
+        "職務経験"
+      ],
+      "source_url": "https://www.future.co.jp/recruit/recruit/rec-fresh/#section3",
+      "intent": {
+        "subjects": [
+          "第二新卒",
+          "既卒",
+          "年齢制限",
+          "年齢"
+        ],
+        "aspects": [
+          "応募",
+          "でき",
+          "可能",
+          "制限",
+          "対象"
+        ]
+      }
+    },
+    {
+      "id": "overseas",
+      "category": "応募",
+      "question": "海外大学の学生は応募できる？",
+      "answer": "海外大学の学生も採用対象で、日本滞在中に国内新卒と同じ選考を受けます。外国籍の方にはネイティブレベルの日本語が応募条件と案内されています。",
+      "terms": [
+        "海外大学",
+        "留学",
+        "外国籍",
+        "国外大学"
+      ],
+      "source_url": "https://www.future.co.jp/recruit/recruit/rec-fresh/#section3",
+      "intent": {
+        "subjects": [
+          "海外大学",
+          "留学",
+          "外国籍",
+          "国外大学"
+        ],
+        "aspects": [
+          "応募",
+          "採用",
+          "対象",
+          "でき",
+          "可能",
+          "日本語"
+        ]
+      }
+    },
+    {
+      "id": "interview",
+      "category": "選考",
+      "question": "面接はオンライン？",
+      "answer": "最終面接は対面が基本で、選考状況や希望に応じて柔軟に対応すると案内されています。",
+      "terms": [
+        "オンライン面接",
+        "Web面接",
+        "面接形式",
+        "対面面接",
+        "最終面接",
+        "面接"
+      ],
+      "source_url": "https://www.future.co.jp/recruit/recruit/rec-fresh/#section3",
+      "intent": {
+        "subjects": [
+          "面接",
+          "Web面接",
+          "オンライン面接"
+        ],
+        "aspects": [
+          "オンライン",
+          "Web",
+          "対面",
+          "形式",
+          "可能",
+          "どこ",
+          "実施"
+        ]
+      }
+    },
+    {
+      "id": "skills",
+      "category": "選考",
+      "question": "選考時にITスキルは必要？",
+      "answer": "選考段階ではITスキルの有無は問われないと案内されています。",
+      "terms": [
+        "ITスキル",
+        "文系",
+        "理系",
+        "プログラミング未経験",
+        "未経験"
+      ],
+      "source_url": "https://www.future.co.jp/recruit/recruit/rec-fresh/#section3",
+      "intent": {
+        "subjects": [
+          "ITスキル",
+          "プログラミング未経験",
+          "文系",
+          "理系"
+        ],
+        "aspects": [
+          "必要",
+          "問",
+          "選考",
+          "応募",
+          "でき",
+          "経験"
+        ]
+      }
+    },
+    {
+      "id": "training",
+      "category": "研修",
+      "question": "新人研修はどれくらい？",
+      "answer": "新人研修は4～6か月で、プログラミング中心のIT基礎研修がカリキュラムの約7割とされています。",
+      "terms": [
+        "新人研修",
+        "研修期間",
+        "研修内容",
+        "プログラミング研修"
+      ],
+      "source_url": "https://www.future.co.jp/recruit/recruit/rec-fresh/#section3",
+      "intent": {
+        "subjects": [
+          "新人研修",
+          "研修"
+        ],
+        "aspects": [
+          "期間",
+          "何か月",
+          "どれくらい",
+          "内容",
+          "プログラミング",
+          "何を",
+          "割合"
+        ]
+      }
+    },
+    {
+      "id": "bookkeeping",
+      "category": "入社条件",
+      "question": "入社前に必要な資格は？",
+      "answer": "日商簿記2級が入社条件です。アドバンスト採用・プロフェッショナル採用では入社前取得は任意と案内されています。",
+      "terms": [
+        "資格",
+        "簿記",
+        "入社条件",
+        "取得必須"
+      ],
+      "source_url": "https://www.future.co.jp/recruit/recruit/rec-fresh/#section3",
+      "intent": {
+        "subjects": [
+          "資格",
+          "簿記",
+          "入社条件"
+        ],
+        "aspects": [
+          "入社前",
+          "必要",
+          "取得",
+          "必須",
+          "何"
+        ]
+      }
+    },
+    {
+      "id": "evaluation",
+      "category": "待遇",
+      "question": "評価制度は？",
+      "answer": "完全360度評価制度と案内されています。年1回、自己評価をプレゼンテーションする機会があります。",
+      "terms": [
+        "評価制度",
+        "360度評価",
+        "昇給",
+        "自己評価"
+      ],
+      "source_url": "https://www.future.co.jp/recruit/recruit/rec-fresh/#section3",
+      "intent": {
+        "subjects": [
+          "評価制度",
+          "360度評価",
+          "自己評価"
+        ],
+        "aspects": [
+          "制度",
+          "どんな",
+          "内容",
+          "プレゼン",
+          "昇給",
+          "どう"
+        ]
+      }
+    },
+    {
+      "id": "salary",
+      "category": "待遇",
+      "question": "ポテンシャル採用の初任給は？",
+      "answer": "募集要項に記載されたポテンシャル採用の初任給は月額375,000円です。固定残業代を含む見込み額で、正式な金額はオファー時に提示されます。",
+      "terms": [
+        "初任給",
+        "ポテンシャル採用の給与",
+        "月額給与",
+        "新卒給与"
+      ],
+      "source_url": "https://www.future.co.jp/recruit/recruit/rec-fresh/#section2",
+      "intent": {
+        "subjects": [
+          "初任給",
+          "給与",
+          "月額",
+          "給料"
+        ],
+        "aspects": [
+          "いくら",
+          "ポテンシャル",
+          "金額",
+          "月額",
+          "新卒"
+        ]
+      }
+    },
+    {
+      "id": "dress",
+      "category": "働き方",
+      "question": "勤務時の服装は？",
+      "answer": "顧客訪問・常駐時はスーツが基本で、社内ではビジネスカジュアルの社員も多いと案内されています。新卒の研修期間はスーツ着用とされています。",
+      "terms": [
+        "服装",
+        "スーツ",
+        "ビジネスカジュアル",
+        "私服"
+      ],
+      "source_url": "https://www.future.co.jp/recruit/recruit/rec-fresh/#section3",
+      "intent": {
+        "subjects": [
+          "服装",
+          "スーツ",
+          "私服",
+          "ビジネスカジュアル"
+        ],
+        "aspects": [
+          "勤務",
+          "研修",
+          "服装",
+          "着用",
+          "どんな",
+          "大丈夫"
+        ]
+      }
+    },
+    {
+      "id": "holiday",
+      "category": "働き方",
+      "question": "休日出勤はある？",
+      "answer": "プロジェクトの状況によって休日出勤になる場合があり、その場合は平日に代休を取得する規則です。",
+      "terms": [
+        "休日出勤",
+        "代休",
+        "土日勤務"
+      ],
+      "source_url": "https://www.future.co.jp/recruit/recruit/rec-fresh/#section3",
+      "intent": {
+        "subjects": [
+          "休日出勤",
+          "土日勤務",
+          "代休"
+        ],
+        "aspects": [
+          "あり",
+          "ある",
+          "代休",
+          "休み",
+          "取得",
+          "なる"
+        ]
+      }
+    },
+    {
+      "id": "transfer",
+      "category": "働き方",
+      "question": "転勤や出張はある？",
+      "answer": "基本的に東京本社所属で国内転勤はありません。地方への出張はあり得ます。",
+      "terms": [
+        "転勤",
+        "出張",
+        "勤務地",
+        "東京勤務"
+      ],
+      "source_url": "https://www.future.co.jp/recruit/recruit/rec-fresh/#section3",
+      "intent": {
+        "subjects": [
+          "転勤",
+          "出張",
+          "勤務地"
+        ],
+        "aspects": [
+          "あり",
+          "ある",
+          "どこ",
+          "東京"
+        ]
+      }
+    },
+    {
+      "id": "hours",
+      "category": "働き方",
+      "question": "勤務時間は？",
+      "answer": "標準時刻は9時から17時30分で休憩1時間です。コンサルタントには専門業務型裁量労働制が適用されます。",
+      "terms": [
+        "勤務時間",
+        "就業時間",
+        "始業",
+        "終業",
+        "裁量労働"
+      ],
+      "source_url": "https://www.future.co.jp/recruit/recruit/rec-fresh/#section3",
+      "intent": {
+        "subjects": [
+          "勤務時間",
+          "就業時間",
+          "始業",
+          "終業",
+          "裁量労働"
+        ],
+        "aspects": [
+          "何時",
+          "時間",
+          "いつ",
+          "何時間",
+          "制度"
+        ]
+      }
+    },
+    {
+      "id": "assignment",
+      "category": "入社後",
+      "question": "プロジェクトの異動はどう決まる？",
+      "answer": "アサイン期間の終了時に面談し、候補プロジェクトとキャリアを考えて次の配属を決めます。同じプロジェクトに2年以上いるコンサルタント社員にはフリーエージェント制度の案内があります。",
+      "terms": [
+        "プロジェクト異動",
+        "配属",
+        "アサイン",
+        "フリーエージェント"
+      ],
+      "source_url": "https://www.future.co.jp/recruit/recruit/rec-fresh/#section3",
+      "intent": {
+        "subjects": [
+          "異動",
+          "配属",
+          "アサイン",
+          "フリーエージェント"
+        ],
+        "aspects": [
+          "どう",
+          "決ま",
+          "希望",
+          "面談",
+          "プロジェクト"
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0a1561">
+  <title>Future Recruit FAQ Assistant｜非公式デモ</title>
+  <link rel="stylesheet" href="/ui.css">
+</head>
+<body>
+  <a class="skip-link" href="#conversation">回答エリアへ移動</a>
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="このデモについて">
+      <div class="project-label">PORTFOLIO PROJECT <span>個人制作</span></div>
+      <h1>Future Recruit<br>FAQ Assistant</h1>
+      <p class="sidebar-copy">フューチャー株式会社の公開採用情報を、出典と一緒に確認できるチャットボットです。</p>
+      <div class="disclaimer" role="note">
+        <strong class="disclaimer-tag">非公式デモ</strong>
+        <p>フューチャー株式会社の公式サービスではありません。応募条件や待遇は公式ページで最終確認してください。</p>
+      </div>
+      <div class="dataset-card">
+        <h2>このデモの参照情報</h2>
+        <p>新卒採用情報・FAQ</p>
+        <p id="checked">参照情報を読み込み中</p>
+        <a href="https://www.future.co.jp/recruit/recruit/rec-fresh/" target="_blank" rel="noopener noreferrer">公式の採用ページを開く <span aria-hidden="true">↗</span></a>
+      </div>
+      <p class="sidebar-bottom">ロゴ・公式画像は使用していません。</p>
+    </aside>
+
+    <main class="chat-panel" id="main-content">
+      <header class="chat-header">
+        <div>
+          <p class="section-label">RECRUIT / Q&amp;A</p>
+          <h2>採用について質問する</h2>
+          <p>公開情報に根拠がある場合は、回答と出典URLを表示します。</p>
+        </div>
+        <div class="header-actions">
+          <span id="mode" class="mode">読み込み中</span>
+          <button type="button" id="clear" class="clear-button">履歴を消去</button>
+        </div>
+      </header>
+      <div class="conversation" id="conversation" tabindex="-1" aria-live="polite" aria-relevant="additions text">
+        <section class="welcome" id="welcome">
+          <p class="welcome-kicker">START HERE <span>はじめに</span></p>
+          <h3>質問を入力するか、例から選んでください。</h3>
+          <p>確認できない情報は推測せず「公開情報では確認できません」と回答します。</p>
+          <div class="examples" aria-label="質問例">
+            <button type="button" data-question="Tech選考はどんな人が対象ですか？"><span class="example-kicker">選考</span><strong>Tech選考の対象は？</strong><span class="example-arrow" aria-hidden="true">→</span></button>
+            <button type="button" data-question="新人研修は何か月ですか？"><span class="example-kicker">研修</span><strong>新人研修は何か月？</strong><span class="example-arrow" aria-hidden="true">→</span></button>
+            <button type="button" data-question="転勤はありますか？"><span class="example-kicker">働き方</span><strong>転勤はありますか？</strong><span class="example-arrow" aria-hidden="true">→</span></button>
+            <button type="button" data-question="Tech選考の面接回数は？"><span class="example-kicker">確認できない例</span><strong>面接回数は分かる？</strong><span class="example-arrow" aria-hidden="true">→</span></button>
+          </div>
+        </section>
+      </div>
+      <div class="composer-area">
+        <form id="ask-form" class="composer">
+          <div class="question-field">
+            <label for="question">質問 <span>（300文字以内）</span></label>
+            <textarea id="question" name="question" maxlength="300" rows="2" placeholder="例：Tech選考はどんな人が対象ですか？" autocomplete="off" aria-describedby="question-help question-count" required></textarea>
+          </div>
+          <button type="submit" id="send">送信 <span aria-hidden="true">→</span></button>
+        </form>
+        <div class="composer-footer"><p id="question-help">Enterで送信・Shift + Enterで改行。各質問は独立して検索します。</p><span id="question-count" aria-live="off">0 / 300文字</span></div>
+        <p id="ai-note" hidden>AI連携が有効な場合、ルールで根拠を選べない質問文と登録済みの要約をOpenAI APIへ送信します。</p>
+      </div>
+    </main>
+  </div>
+  <script src="/app.js" defer></script>
+</body>
+</html>

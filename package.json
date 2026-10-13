@@ -1,0 +1,15 @@
+{
+  "name": "future-recruit-faq-assistant-demo",
+  "version": "1.2.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "ingest": "node scripts/ingest.js",
+    "demo": "node scripts/build-offline-demo.js",
+    "start": "node src/server.js",
+    "eval": "node scripts/evaluate.js",
+    "eval:ai": "node scripts/evaluate-ai.js",
+    "test": "node --test"
+  },
+  "engines": { "node": ">=18" }
+}

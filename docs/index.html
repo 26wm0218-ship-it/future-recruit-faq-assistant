@@ -1,0 +1,529 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0a1561">
+  <title>Future Recruit FAQ Assistant｜非公式デモ</title>
+  <style>/* Future採用サイトの色・見出し・直線的な区切りを参考にした非公式デモ。 */
+:root {
+  color-scheme: light;
+  font-family: "Noto Sans JP", "Hiragino Kaku Gothic ProN", "Yu Gothic", Meiryo, sans-serif;
+  font-synthesis: none;
+  --ink: #252525;
+  --muted: #454a55;
+  --navy: #0a1561;
+  --pink: #e5004f;
+  --primary: #2c6ae2;
+  --primary-dark: #0a1561;
+  --border: #89909b;
+  --line: #c8cbd2;
+  --surface: #fff;
+  --canvas: #f8f9fc;
+  --pale-blue: #edf2fd;
+  --focus: #ffbf47;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; min-height: 100%; }
+body { background: var(--surface); color: var(--ink); font-size: 16px; line-height: 1.6; }
+button, textarea { font: inherit; }
+button { cursor: pointer; }
+button:disabled { cursor: wait; opacity: .7; }
+a { color: var(--primary); text-decoration: underline; text-underline-offset: .18em; }
+a:hover { color: var(--primary-dark); text-decoration-thickness: 2px; }
+button:focus-visible, a:focus-visible, textarea:focus-visible, .conversation:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 3px;
+}
+.skip-link {
+  position: fixed; z-index: 10; top: 8px; left: 8px; padding: 8px 16px;
+  background: var(--navy); color: white; transform: translateY(-150%);
+}
+.skip-link:focus { transform: none; color: white; }
+
+.app-shell {
+  display: grid;
+  grid-template-columns: minmax(280px, 304px) minmax(0, 1fr);
+  min-height: 100dvh;
+  max-width: 1600px;
+  margin: 0 auto;
+}
+.sidebar {
+  display: flex; flex-direction: column; gap: 0;
+  padding: 32px 24px 24px;
+  border-right: 1px solid var(--line);
+  background: #fff;
+}
+.project-label, .section-label, .welcome-kicker {
+  margin: 0; color: var(--navy); font-size: 14px; font-weight: 700;
+}
+.project-label { padding-left: 12px; border-left: 4px solid var(--pink); letter-spacing: .09em; }
+.project-label span, .welcome-kicker span { margin-left: 6px; letter-spacing: 0; }
+.sidebar h1 {
+  margin: 30px 0 16px; font-size: clamp(27px, 2.3vw, 37px);
+  line-height: 1.19; letter-spacing: -.035em; overflow-wrap: anywhere;
+}
+.sidebar h1::after { content: ""; display: block; width: 88px; height: 4px; margin-top: 20px; background: linear-gradient(90deg, var(--pink) 0 30%, var(--navy) 30% 60%, #999 60%); }
+.sidebar-copy { margin: 0; line-height: 1.75; }
+.disclaimer {
+  margin-top: 32px; padding: 16px;
+  border: 1px solid var(--border); border-left: 4px solid var(--pink);
+  background: #fff8fa;
+}
+.disclaimer-tag { display: block; color: var(--navy); font-size: 16px; }
+.disclaimer p { margin: 8px 0 0; font-size: 14px; line-height: 1.65; }
+.dataset-card {
+  margin-top: 24px; padding-top: 24px;
+  border-top: 4px solid var(--navy);
+}
+.dataset-card h2 { margin: 0 0 8px; font-size: 16px; }
+.dataset-card p { margin: 0 0 8px; font-size: 14px; }
+.dataset-card a { display: inline-block; margin-top: 4px; font-size: 14px; font-weight: 700; color: var(--navy); }
+.sidebar-bottom { margin: auto 0 0; padding-top: 28px; color: var(--muted); font-size: 14px; }
+
+.chat-panel { display: flex; flex-direction: column; min-width: 0; height: 100dvh; min-height: 600px; }
+.chat-header {
+  position: relative;
+  display: flex; align-items: center; justify-content: space-between; gap: 24px;
+  padding: 28px clamp(24px, 4vw, 56px) 32px;
+  border-bottom: 1px solid var(--line); background: var(--surface);
+}
+.chat-header::after { content: ""; position: absolute; bottom: -1px; left: clamp(24px, 4vw, 56px); width: 160px; height: 5px; background: linear-gradient(90deg, var(--pink) 0 30%, var(--navy) 30% 60%, #999 60%); }
+.section-label { color: var(--primary); letter-spacing: .12em; }
+.chat-header h2 { margin: 4px 0; font-size: clamp(25px, 2.4vw, 34px); line-height: 1.35; letter-spacing: -.03em; }
+.chat-header p:not(.section-label) { margin: 0; color: var(--muted); font-size: 14px; }
+.header-actions { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; justify-content: flex-end; }
+.mode {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 7px 12px; border: 1px solid var(--border);
+  border-radius: 0; background: var(--canvas);
+  color: var(--ink); font-size: 14px; font-weight: 700;
+}
+.mode::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: #13754a; }
+.clear-button {
+  min-height: 44px; padding: 8px 16px;
+  border: 1px solid var(--navy); border-radius: 0;
+  background: white; color: var(--navy);
+  font-size: 14px; font-weight: 700; text-decoration: underline; text-underline-offset: .18em;
+}
+.clear-button:hover { background: var(--pale-blue); }
+
+.conversation {
+  display: flex; flex: 1; flex-direction: column; gap: 24px;
+  min-height: 0; overflow-y: auto;
+  padding: 32px clamp(24px, 5vw, 64px) 48px;
+  background: var(--canvas);
+  scroll-behavior: smooth;
+}
+.welcome { width: min(100%, 740px); margin: auto; padding: 16px 0 32px; }
+.welcome[hidden] { display: none; }
+.welcome-kicker { display: inline-block; padding-bottom: 3px; border-bottom: 3px solid var(--pink); letter-spacing: .1em; }
+.welcome h3 { margin: 20px 0 12px; font-size: clamp(24px, 2.5vw, 32px); line-height: 1.4; letter-spacing: -.025em; }
+.welcome p:not(.welcome-kicker) { margin: 0; max-width: 640px; color: var(--muted); line-height: 1.75; }
+.examples { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-top: 32px; }
+.examples button {
+  position: relative;
+  display: grid; grid-template-columns: 1fr auto; gap: 8px 12px;
+  min-height: 108px; padding: 20px;
+  border: 1px solid var(--border); border-radius: 0;
+  background: white; text-align: left;
+}
+.examples button::before { content: ""; position: absolute; top: -1px; left: -1px; width: 88px; height: 4px; background: linear-gradient(90deg, var(--pink) 0 30%, var(--navy) 30% 60%, #999 60%); }
+.examples button:hover { border-color: var(--primary); background: var(--pale-blue); }
+.example-kicker { grid-column: 1 / -1; color: var(--muted); font-size: 14px; }
+.examples strong { font-size: 16px; line-height: 1.5; }
+.example-arrow { color: var(--pink); font-weight: 700; }
+
+.message { display: flex; gap: 12px; width: min(100%, 800px); align-self: flex-start; }
+.message.user { align-self: flex-end; width: min(100%, 700px); flex-direction: row-reverse; }
+.avatar {
+  display: grid; place-items: center; flex: none;
+  width: 40px; height: 40px;
+  border: 1px solid var(--navy); border-radius: 0;
+  background: var(--navy); color: white; font-size: 16px; font-weight: 700;
+}
+.message.user .avatar { background: var(--pink); border-color: var(--pink); }
+.message-body { min-width: 0; max-width: calc(100% - 52px); }
+.message-label { margin: 0 0 8px; color: var(--muted); font-size: 14px; font-weight: 700; }
+.answer-status {
+  display: inline-block; margin-left: 10px; padding: 2px 8px;
+  border: 1px solid; border-radius: 0; font-size: 14px; vertical-align: middle;
+}
+.answer-status.supported { border-color: #277354; color: #165b3f; background: #e8f6ee; }
+.answer-status.unknown { border-color: #8c6600; color: #634900; background: #fff4d9; }
+.message p {
+  display: block; margin: 0; padding: 16px 20px;
+  border: 1px solid var(--border); border-radius: 0;
+  background: white; line-height: 1.75; white-space: pre-wrap; overflow-wrap: anywhere;
+}
+.message.user .message-body { text-align: right; }
+.message.user p { border-color: var(--navy); background: var(--pale-blue); text-align: left; }
+.message.pending p { color: var(--muted); }
+.answer-part-label { display: block; margin-bottom: 4px; color: var(--navy); font-size: 14px; font-weight: 700; }
+.answer-lead { display: block; font-size: 17px; line-height: 1.7; }
+.answer-detail { display: block; margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--line); font-size: 16px; font-weight: 400; }
+.source-box {
+  display: flex; flex-direction: column; gap: 6px;
+  margin-top: 12px; padding: 12px 16px;
+  border-left: 4px solid var(--navy);
+  background: white; font-size: 14px;
+}
+.source-box span { color: var(--ink); font-weight: 700; }
+.source-box a { color: var(--navy); line-height: 1.5; overflow-wrap: anywhere; }
+
+.composer-area {
+  padding: 20px clamp(24px, 5vw, 64px) 18px;
+  border-top: 1px solid var(--line); background: white;
+}
+.composer { display: flex; align-items: flex-end; gap: 16px; }
+.question-field { flex: 1; min-width: 0; }
+.question-field label { display: block; margin-bottom: 8px; font-size: 16px; font-weight: 700; }
+.question-field label span { font-size: 14px; font-weight: 400; color: var(--muted); }
+.composer textarea {
+  display: block; width: 100%; min-height: 80px; max-height: 144px;
+  padding: 12px 14px; resize: vertical;
+  border: 2px solid var(--border); border-radius: 0;
+  background: white; color: var(--ink); font-size: 16px; line-height: 1.5;
+}
+.composer textarea:hover { border-color: var(--primary); }
+.composer textarea::placeholder { color: #566676; }
+.composer button {
+  flex: none; min-width: 104px; min-height: 48px; padding: 10px 18px;
+  border: 2px solid var(--primary); border-radius: 0;
+  background: var(--primary); color: white; font-size: 16px; font-weight: 700;
+}
+.composer button:hover { background: var(--primary-dark); border-color: var(--primary-dark); text-decoration: underline; text-underline-offset: .18em; }
+.composer button span { margin-left: 8px; }
+.composer-footer { display: flex; justify-content: space-between; gap: 16px; margin-top: 8px; color: var(--muted); font-size: 14px; }
+.composer-footer p { margin: 0; }
+.composer-footer span { flex: none; }
+#ai-note { margin: 8px 0 0; color: var(--muted); font-size: 14px; line-height: 1.5; }
+
+@media (max-width: 980px) {
+  .app-shell { grid-template-columns: minmax(250px, 280px) minmax(0, 1fr); }
+  .sidebar { padding: 24px 20px; }
+  .chat-header { align-items: flex-start; }
+  .header-actions { min-width: 130px; }
+  .mode { font-size: 14px; }
+}
+@media (max-width: 760px) {
+  .app-shell { display: flex; flex-direction: column; }
+  .sidebar { display: block; padding: 16px 20px; border-right: 0; border-bottom: 1px solid var(--line); }
+  .sidebar h1 { margin: 8px 0 4px; font-size: 22px; }
+  .sidebar-copy, .sidebar-bottom { display: none; }
+  .disclaimer { margin-top: 12px; padding: 8px 12px; }
+  .disclaimer-tag { display: inline; }
+  .disclaimer p { display: inline; margin-left: 6px; }
+  .dataset-card { margin-top: 10px; padding-top: 8px; }
+  .dataset-card h2, .dataset-card p { display: none; }
+  .dataset-card a { margin-top: 0; }
+  .chat-panel { height: calc(100dvh - 196px); min-height: 520px; }
+  .chat-header { padding: 16px 20px; }
+  .chat-header p:not(.section-label) { display: none; }
+  .conversation { padding: 24px 20px; }
+  .composer-area { padding: 16px 20px; }
+}
+@media (max-width: 540px) {
+  .project-label { font-size: 14px; }
+  .sidebar h1 { font-size: 20px; }
+  .disclaimer p { font-size: 14px; }
+  .chat-header { gap: 8px; }
+  .chat-header h2 { font-size: 20px; }
+  .mode { display: none; }
+  .clear-button { padding: 7px 10px; }
+  .conversation { gap: 20px; padding: 20px 16px; }
+  .welcome { padding: 8px 0 24px; }
+  .welcome h3 { font-size: 22px; }
+  .examples { grid-template-columns: 1fr; gap: 8px; margin-top: 20px; }
+  .examples button { min-height: 66px; gap: 2px 8px; padding: 8px 14px; }
+  .example-kicker { font-size: 14px; }
+  .message { gap: 8px; }
+  .avatar { width: 36px; height: 36px; }
+  .message-body { max-width: calc(100% - 44px); }
+  .answer-status { display: block; width: fit-content; margin: 4px 0 0; }
+  .message p { padding: 12px 14px; }
+  .composer-area { padding: 12px 16px; }
+  .composer { gap: 8px; }
+  .composer textarea { min-height: 68px; }
+  .composer button { min-width: 72px; padding: 9px 10px; }
+  .composer button span { display: none; }
+  .composer-footer { display: block; }
+  .composer-footer span { display: block; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .conversation { scroll-behavior: auto; }
+}
+</style>
+</head>
+<body>
+  <a class="skip-link" href="#conversation">回答エリアへ移動</a>
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="このデモについて">
+      <div class="project-label">PORTFOLIO PROJECT <span>個人制作</span></div>
+      <h1>Future Recruit<br>FAQ Assistant</h1>
+      <p class="sidebar-copy">フューチャー株式会社の公開採用情報を、出典と一緒に確認できるチャットボットです。</p>
+      <div class="disclaimer" role="note">
+        <strong class="disclaimer-tag">非公式デモ</strong>
+        <p>フューチャー株式会社の公式サービスではありません。応募条件や待遇は公式ページで最終確認してください。</p>
+      </div>
+      <div class="dataset-card">
+        <h2>このデモの参照情報</h2>
+        <p>新卒採用情報・FAQ</p>
+        <p id="checked">参照情報を読み込み中</p>
+        <a href="https://www.future.co.jp/recruit/recruit/rec-fresh/" target="_blank" rel="noopener noreferrer">公式の採用ページを開く <span aria-hidden="true">↗</span></a>
+      </div>
+      <p class="sidebar-bottom">ロゴ・公式画像は使用していません。</p>
+    </aside>
+
+    <main class="chat-panel" id="main-content">
+      <header class="chat-header">
+        <div>
+          <p class="section-label">RECRUIT / Q&amp;A</p>
+          <h2>採用について質問する</h2>
+          <p>公開情報に根拠がある場合は、回答と出典URLを表示します。</p>
+        </div>
+        <div class="header-actions">
+          <span id="mode" class="mode">読み込み中</span>
+          <button type="button" id="clear" class="clear-button">履歴を消去</button>
+        </div>
+      </header>
+      <div class="conversation" id="conversation" tabindex="-1" aria-live="polite" aria-relevant="additions text">
+        <section class="welcome" id="welcome">
+          <p class="welcome-kicker">START HERE <span>はじめに</span></p>
+          <h3>質問を入力するか、例から選んでください。</h3>
+          <p>確認できない情報は推測せず「公開情報では確認できません」と回答します。</p>
+          <div class="examples" aria-label="質問例">
+            <button type="button" data-question="Tech選考はどんな人が対象ですか？"><span class="example-kicker">選考</span><strong>Tech選考の対象は？</strong><span class="example-arrow" aria-hidden="true">→</span></button>
+            <button type="button" data-question="新人研修は何か月ですか？"><span class="example-kicker">研修</span><strong>新人研修は何か月？</strong><span class="example-arrow" aria-hidden="true">→</span></button>
+            <button type="button" data-question="転勤はありますか？"><span class="example-kicker">働き方</span><strong>転勤はありますか？</strong><span class="example-arrow" aria-hidden="true">→</span></button>
+            <button type="button" data-question="Tech選考の面接回数は？"><span class="example-kicker">確認できない例</span><strong>面接回数は分かる？</strong><span class="example-arrow" aria-hidden="true">→</span></button>
+          </div>
+        </section>
+      </div>
+      <div class="composer-area">
+        <form id="ask-form" class="composer">
+          <div class="question-field">
+            <label for="question">質問 <span>（300文字以内）</span></label>
+            <textarea id="question" name="question" maxlength="300" rows="2" placeholder="例：Tech選考はどんな人が対象ですか？" autocomplete="off" aria-describedby="question-help question-count" required></textarea>
+          </div>
+          <button type="submit" id="send">送信 <span aria-hidden="true">→</span></button>
+        </form>
+        <div class="composer-footer"><p id="question-help">Enterで送信・Shift + Enterで改行。各質問は独立して検索します。</p><span id="question-count" aria-live="off">0 / 300文字</span></div>
+        <p id="ai-note" hidden>AI連携が有効な場合、ルールで根拠を選べない質問文と登録済みの要約をOpenAI APIへ送信します。</p>
+      </div>
+    </main>
+  </div>
+  <script>
+const corpus = {"checked_at":"2026-10-13","source_policy":"https://www.future.co.jp/site_policy/","facts":[{"id":"tech","category":"選考","question":"Tech選考の対象は？","answer":"Tech選考は、個人開発の経験がある方や大学で研究をしてきた方が対象です。","terms":["Tech選考","技術選考","研究","個人開発","プロダクト"],"source_url":"https://www.future.co.jp/recruit/recruit/rec-fresh/#section2","intent":{"subjects":["Tech選考","技術選考"],"aspects":["対象","どんな人","経験","研究","個人開発","応募","誰"]}},{"id":"role","category":"募集要項","question":"新卒の募集職種は？","answer":"新卒採用の募集職種はITコンサルタントです。","terms":["募集職種","職種","ITコンサルタント","何職"],"source_url":"https://www.future.co.jp/recruit/recruit/rec-fresh/#section2","intent":{"subjects":["募集職種","職種","新卒"],"aspects":["職種","何の仕事","何職","ポジション","採用"]}},{"id":"apply","category":"応募","question":"選考はいつ始まる？","answer":"選考案内は、採用サイトからエントリーした方に案内されます。","terms":["選考時期","いつ開催","いつ始まる","エントリー","応募開始"],"source_url":"https://www.future.co.jp/recruit/recruit/rec-fresh/#section3","intent":{"subjects":["選考","エントリー","応募"],"aspects":["いつ","時期","開催","開始","案内"]}},{"id":"age","category":"応募","question":"年齢制限や第二新卒の応募は？","answer":"明確な年齢制限は設けられていません。職務経験が3年未満の第二新卒は、新卒と同じ条件・選考プロセスで扱われます。","terms":["年齢制限","既卒","第二新卒","職務経験"],"source_url":"https://www.future.co.jp/recruit/recruit/rec-fresh/#section3","intent":{"subjects":["第二新卒","既卒","年齢制限","年齢"],"aspects":["応募","でき","可能","制限","対象"]}},{"id":"overseas","category":"応募","question":"海外大学の学生は応募できる？","answer":"海外大学の学生も採用対象で、日本滞在中に国内新卒と同じ選考を受けます。外国籍の方にはネイティブレベルの日本語が応募条件と案内されています。","terms":["海外大学","留学","外国籍","国外大学"],"source_url":"https://www.future.co.jp/recruit/recruit/rec-fresh/#section3","intent":{"subjects":["海外大学","留学","外国籍","国外大学"],"aspects":["応募","採用","対象","でき","可能","日本語"]}},{"id":"interview","category":"選考","question":"面接はオンライン？","answer":"最終面接は対面が基本で、選考状況や希望に応じて柔軟に対応すると案内されています。","terms":["オンライン面接","Web面接","面接形式","対面面接","最終面接","面接"],"source_url":"https://www.future.co.jp/recruit/recruit/rec-fresh/#section3","intent":{"subjects":["面接","Web面接","オンライン面接"],"aspects":["オンライン","Web","対面","形式","可能","どこ","実施"]}},{"id":"skills","category":"選考","question":"選考時にITスキルは必要？","answer":"選考段階ではITスキルの有無は問われないと案内されています。","terms":["ITスキル","文系","理系","プログラミング未経験","未経験"],"source_url":"https://www.future.co.jp/recruit/recruit/rec-fresh/#section3","intent":{"subjects":["ITスキル","プログラミング未経験","文系","理系"],"aspects":["必要","問","選考","応募","でき","経験"]}},{"id":"training","category":"研修","question":"新人研修はどれくらい？","answer":"新人研修は4～6か月で、プログラミング中心のIT基礎研修がカリキュラムの約7割とされています。","terms":["新人研修","研修期間","研修内容","プログラミング研修"],"source_url":"https://www.future.co.jp/recruit/recruit/rec-fresh/#section3","intent":{"subjects":["新人研修","研修"],"aspects":["期間","何か月","どれくらい","内容","プログラミング","何を","割合"]}},{"id":"bookkeeping","category":"入社条件","question":"入社前に必要な資格は？","answer":"日商簿記2級が入社条件です。アドバンスト採用・プロフェッショナル採用では入社前取得は任意と案内されています。","terms":["資格","簿記","入社条件","取得必須"],"source_url":"https://www.future.co.jp/recruit/recruit/rec-fresh/#section3","intent":{"subjects":["資格","簿記","入社条件"],"aspects":["入社前","必要","取得","必須","何"]}},{"id":"evaluation","category":"待遇","question":"評価制度は？","answer":"完全360度評価制度と案内されています。年1回、自己評価をプレゼンテーションする機会があります。","terms":["評価制度","360度評価","昇給","自己評価"],"source_url":"https://www.future.co.jp/recruit/recruit/rec-fresh/#section3","intent":{"subjects":["評価制度","360度評価","自己評価"],"aspects":["制度","どんな","内容","プレゼン","昇給","どう"]}},{"id":"salary","category":"待遇","question":"ポテンシャル採用の初任給は？","answer":"募集要項に記載されたポテンシャル採用の初任給は月額375,000円です。固定残業代を含む見込み額で、正式な金額はオファー時に提示されます。","terms":["初任給","ポテンシャル採用の給与","月額給与","新卒給与"],"source_url":"https://www.future.co.jp/recruit/recruit/rec-fresh/#section2","intent":{"subjects":["初任給","給与","月額","給料"],"aspects":["いくら","ポテンシャル","金額","月額","新卒"]}},{"id":"dress","category":"働き方","question":"勤務時の服装は？","answer":"顧客訪問・常駐時はスーツが基本で、社内ではビジネスカジュアルの社員も多いと案内されています。新卒の研修期間はスーツ着用とされています。","terms":["服装","スーツ","ビジネスカジュアル","私服"],"source_url":"https://www.future.co.jp/recruit/recruit/rec-fresh/#section3","intent":{"subjects":["服装","スーツ","私服","ビジネスカジュアル"],"aspects":["勤務","研修","服装","着用","どんな","大丈夫"]}},{"id":"holiday","category":"働き方","question":"休日出勤はある？","answer":"プロジェクトの状況によって休日出勤になる場合があり、その場合は平日に代休を取得する規則です。","terms":["休日出勤","代休","土日勤務"],"source_url":"https://www.future.co.jp/recruit/recruit/rec-fresh/#section3","intent":{"subjects":["休日出勤","土日勤務","代休"],"aspects":["あり","ある","代休","休み","取得","なる"]}},{"id":"transfer","category":"働き方","question":"転勤や出張はある？","answer":"基本的に東京本社所属で国内転勤はありません。地方への出張はあり得ます。","terms":["転勤","出張","勤務地","東京勤務"],"source_url":"https://www.future.co.jp/recruit/recruit/rec-fresh/#section3","intent":{"subjects":["転勤","出張","勤務地"],"aspects":["あり","ある","どこ","東京"]}},{"id":"hours","category":"働き方","question":"勤務時間は？","answer":"標準時刻は9時から17時30分で休憩1時間です。コンサルタントには専門業務型裁量労働制が適用されます。","terms":["勤務時間","就業時間","始業","終業","裁量労働"],"source_url":"https://www.future.co.jp/recruit/recruit/rec-fresh/#section3","intent":{"subjects":["勤務時間","就業時間","始業","終業","裁量労働"],"aspects":["何時","時間","いつ","何時間","制度"]}},{"id":"assignment","category":"入社後","question":"プロジェクトの異動はどう決まる？","answer":"アサイン期間の終了時に面談し、候補プロジェクトとキャリアを考えて次の配属を決めます。同じプロジェクトに2年以上いるコンサルタント社員にはフリーエージェント制度の案内があります。","terms":["プロジェクト異動","配属","アサイン","フリーエージェント"],"source_url":"https://www.future.co.jp/recruit/recruit/rec-fresh/#section3","intent":{"subjects":["異動","配属","アサイン","フリーエージェント"],"aspects":["どう","決ま","希望","面談","プロジェクト"]}}]};
+const UNKNOWN = '公開情報では確認できません';
+
+const normalize = value => String(value).normalize('NFKC').toLowerCase().replace(/[\s\p{P}\p{S}]/gu, '');
+
+function matchTerms(query, terms) {
+  return terms.map(normalize).filter(term => term.length >= 2 && query.includes(term));
+}
+
+function evidenceCoverage(query, terms) {
+  // 挨拶・助詞などを除いた質問のうち、照合した語が説明できる割合。
+  const semantic = query.replace(/(?:教えてください|教えて|できますか|ありますか|でしょうか|何ですか|ですか|について|どんな)/g, '')
+    .replace(/[はがのをにでもか]/g, '');
+  if (!semantic) return 0;
+  let remainder = semantic;
+  for (const term of [...new Set(terms)].sort((a, b) => b.length - a.length)) remainder = remainder.replaceAll(term, '');
+  return 1 - remainder.length / semantic.length;
+}
+
+function mustAbstain(question, facts) {
+  const query = normalize(question);
+  if (/(?:20\d{2}|\d{2})年度?/.test(query)) return true;
+  const genericSubjects = new Set(['選考', '応募', '新卒']);
+  const topics = new Map();
+  for (const fact of facts) {
+    const matched = fact.intent.subjects.map(normalize).filter(term =>
+      term.length >= 2 && !genericSubjects.has(term) && query.includes(term));
+    if (matched.length) topics.set(fact.id, matched);
+  }
+  if (topics.size < 2) return false;
+  const oneFactCoversAll = facts.some(fact => [...topics].every(([id, terms]) =>
+    id === fact.id || terms.some(term => normalize(fact.answer).includes(term))));
+  return !oneFactCoversAll;
+}
+
+function search(question, facts, limit = 5) {
+  const query = normalize(question);
+  if (query.length < 2 || mustAbstain(question, facts)) return [];
+  return facts.map(fact => {
+    const subjects = matchTerms(query, fact.intent.subjects);
+    const aspects = matchTerms(query, fact.intent.aspects);
+    if (!subjects.length || !aspects.length) return null;
+    if (evidenceCoverage(query, [...subjects, ...aspects]) < 0.45) return null;
+    const score = Math.max(...subjects.map(s => s.length)) * 2 + Math.max(...aspects.map(s => s.length));
+    return { fact, score, matched_subjects: subjects, matched_aspects: aspects };
+  }).filter(Boolean).sort((a, b) => b.score - a.score).slice(0, limit);
+}
+
+function selectEvidence(question, facts) {
+  const hits = search(question, facts);
+  // 高精度優先: 対象と尋ねている項目の両方が一致し、候補が一つだけのとき回答する。
+  if (hits.length !== 1) return null;
+  const query = normalize(question);
+  const genericSubjects = new Set(['選考', '応募', '新卒', '研修']);
+  const otherTopic = facts.some(fact => fact.id !== hits[0].fact.id && fact.intent.subjects.some(subject => {
+    const term = normalize(subject);
+    return term.length >= 2 && !genericSubjects.has(term) && query.includes(term);
+  }));
+  return otherTopic ? null : hits[0].fact;
+}
+
+window.APP_TRANSPORT = {
+  meta: async () => ({ checked_at: corpus.checked_at, fact_count: corpus.facts.length, mode: 'オフライン · 根拠検索のみ' }),
+  ask: async question => {
+    const fact = selectEvidence(question, corpus.facts);
+    return {
+      answer: fact ? fact.answer : UNKNOWN,
+      status: fact ? 'answered' : 'unknown',
+      evidence_id: fact?.id || null,
+      sources: [{ title: fact ? 'フューチャー株式会社 新卒採用情報' : '確認対象: フューチャー株式会社 新卒採用情報', url: fact?.source_url || 'https://www.future.co.jp/recruit/recruit/rec-fresh/' }]
+    };
+  }
+};
+const transport = window.APP_TRANSPORT || {
+  meta: async () => { const response = await fetch('/api/meta'); return response.json(); },
+  ask: async question => {
+    const response = await fetch('/api/ask', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ question }) });
+    const data = await response.json();
+    if (!response.ok) throw new Error(data.error || '通信に失敗しました');
+    return data;
+  }
+};
+
+const conversation = document.querySelector('#conversation');
+const welcome = document.querySelector('#welcome');
+const form = document.querySelector('#ask-form');
+const input = document.querySelector('#question');
+const send = document.querySelector('#send');
+const clear = document.querySelector('#clear');
+const count = document.querySelector('#question-count');
+let busy = false;
+
+function updateCount() {
+  count.textContent = `${input.value.length} / 300文字`;
+}
+
+function message(role, text, data = null) {
+  const article = document.createElement('article');
+  article.className = `message ${role}`;
+  const avatar = document.createElement('div');
+  avatar.className = 'avatar';
+  avatar.textContent = role === 'user' ? 'Q' : 'A';
+  const body = document.createElement('div');
+  body.className = 'message-body';
+  const label = document.createElement('div');
+  label.className = 'message-label';
+  label.textContent = role === 'user' ? 'あなた' : '非公式デモ';
+  if (data) {
+    const status = document.createElement('span');
+    status.className = `answer-status ${data.status === 'answered' ? 'supported' : 'unknown'}`;
+    status.textContent = data.status === 'answered' ? (data.retrieval_method === 'ai' ? 'AIが根拠を選定' : '公開情報から回答') : '確認できない質問';
+    label.append(status);
+  }
+  const paragraph = document.createElement('p');
+  if (role === 'assistant' && data?.status === 'answered') {
+    const breakAt = text.indexOf('。');
+    const summary = breakAt >= 0 ? text.slice(0, breakAt + 1) : text;
+    const detail = breakAt >= 0 ? text.slice(breakAt + 1).trim() : '';
+    const heading = document.createElement('span');
+    heading.className = 'answer-part-label';
+    heading.textContent = '回答';
+    const lead = document.createElement('strong');
+    lead.className = 'answer-lead';
+    lead.textContent = summary;
+    paragraph.append(heading, lead);
+    if (detail) {
+      const note = document.createElement('span');
+      note.className = 'answer-detail';
+      note.textContent = detail;
+      paragraph.append(note);
+    }
+  } else {
+    paragraph.textContent = text;
+  }
+  body.append(label, paragraph);
+  if (data?.sources?.length) {
+    const sourceBox = document.createElement('div');
+    sourceBox.className = 'source-box';
+    const sourceLabel = document.createElement('span');
+    sourceLabel.textContent = data.status === 'answered' ? '根拠となる公式ページ' : '確認対象の公式ページ';
+    sourceBox.append(sourceLabel);
+    for (const source of data.sources) {
+      const link = document.createElement('a');
+      link.href = source.url;
+      link.target = '_blank';
+      link.rel = 'noopener noreferrer';
+      link.textContent = source.url;
+      link.title = source.title || source.url;
+      sourceBox.append(link);
+    }
+    body.append(sourceBox);
+  }
+  article.append(avatar, body);
+  conversation.append(article);
+  conversation.scrollTop = conversation.scrollHeight;
+  return { article, paragraph };
+}
+
+async function ask(question) {
+  question = question.trim();
+  if (busy || question.length < 2 || question.length > 300) return;
+  busy = true;
+  send.disabled = true;
+  clear.disabled = true;
+  welcome.hidden = true;
+  message('user', question);
+  input.value = '';
+  input.style.height = 'auto';
+  updateCount();
+  const pending = message('assistant', '公開情報を確認しています…');
+  pending.article.classList.add('pending');
+  try {
+    const result = await transport.ask(question);
+    pending.article.remove();
+    message('assistant', result.answer, result);
+  } catch (error) {
+    pending.paragraph.textContent = `回答を取得できませんでした。${error.message}`;
+    pending.article.classList.remove('pending');
+  } finally {
+    busy = false;
+    send.disabled = false;
+    clear.disabled = false;
+    input.focus();
+  }
+}
+
+form.addEventListener('submit', event => { event.preventDefault(); ask(input.value); });
+input.addEventListener('input', () => {
+  input.style.height = 'auto';
+  input.style.height = `${Math.min(input.scrollHeight, 144)}px`;
+  updateCount();
+});
+input.addEventListener('keydown', event => {
+  if (event.key === 'Enter' && !event.shiftKey && !event.isComposing && event.keyCode !== 229) {
+    event.preventDefault();
+    ask(input.value);
+  }
+});
+document.querySelectorAll('[data-question]').forEach(button => button.addEventListener('click', () => ask(button.dataset.question)));
+clear.addEventListener('click', () => {
+  conversation.querySelectorAll('.message').forEach(node => node.remove());
+  welcome.hidden = false;
+  input.focus();
+});
+transport.meta().then(meta => {
+  document.querySelector('#mode').textContent = meta.mode;
+  document.querySelector('#checked').textContent = `参照確認日 ${meta.checked_at} · ${meta.fact_count}件の要約`;
+  document.querySelector('#ai-note').hidden = !meta.mode.includes('AI');
+}).catch(() => { document.querySelector('#mode').textContent = '接続確認中'; });
+
+</script>
+</body>
+</html>
